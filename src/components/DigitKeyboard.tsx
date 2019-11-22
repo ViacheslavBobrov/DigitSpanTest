@@ -1,9 +1,27 @@
 import React from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+
+const useStyles = makeStyles(theme => ({
+    margin: {
+        margin: theme.spacing(1),
+        maxWidth: '120px', 
+        maxHeight: '120px', 
+        minWidth: '120px', 
+        minHeight: '120px',
+        backgroundColor: '#8F7EAA',
+        color: 'white'
+    },
+}));
 
 function DigitKey(props: any) {
-    return (<button onClick={() => props.onClick()} disabled={props.disabled}>
-        {props.value}
-    </button>);
+    const classes = useStyles();
+    return (
+        <Fab color="primary" className={classes.margin}
+            onClick={() => props.onClick()} disabled={props.disabled}>
+            {props.value}
+        </Fab>
+    );
 }
 
 class DigitKeyboard extends React.Component<{ onClick: any, disabled: boolean }, {}> {

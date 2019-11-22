@@ -1,5 +1,10 @@
 import React from "react";
-import DigitKeyboard from "./DigitKeyboard";
+import DigitGenerator from "./components/DigitGenerator";
+import DigitKeyboard from "./components/DigitKeyboard";
+import RoundStatistic from "./components/RoundStatistic";
+import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
+import { Line } from 'rc-progress';
 import 'typeface-roboto';
 
 
@@ -62,6 +67,7 @@ class App extends React.Component<{}, {
 	}
 
 	handleStartBtnClick() {
+		this.resetRound(0, 0, 5, 3);
 		this.setState({ isRoundOngoing: true })
 		this.setTimeInterval(() => this.generateNextDigit(), 200);
 	}
@@ -75,8 +81,8 @@ class App extends React.Component<{}, {
 			if (this.state.health > 1) {
 				this.setState({ health: this.state.health - 1 });
 			} else {
+				this.setState({ health: 0, isRoundOngoing: false });
 				alert('Game over');
-				this.resetRound(0, 0, 5, 3);
 			}
 
 		}
@@ -93,15 +99,21 @@ class App extends React.Component<{}, {
 
 
 		return (
-			<div>
-				<div>New digit {newDigit}</div><br />
-				<button onClick={this.handleStartBtnClick} disabled={this.state.isRoundOngoing}>Start</button>
-				<DigitKeyboard onClick={(digit: number) => this.handleDigitBtnClick(digit)} disabled={this.state.isSequenceNotGenerated} />
-				<div>Score: {this.state.score}</div>
-				<div>Level: {this.state.level}</div>
-				<div>Health: {this.state.health}</div>
-				<div>Hint: {digitsSequence}</div>
-			</div>
+			<Grid container component="main">
+				<Grid item xs={9} sm={9} md={9} style={{backgroundColor: '#2E2937'}}>
+					<Line percent={this.state.health * 100 / 3} strokeWidth={2} trailWidth={2} strokeColor="#3FB250" trailColor="#51475F" />
+					<DigitGenerator newDigit={newDigit} sequenceLength={this.sequenceLength}/><br />
+					<DigitKeyboard onClick={(digit: number) => this.handleDigitBtnClick(digit)} disabled={this.state.isSequenceNotGenerated} />
+				</Grid>
+				<Grid item xs={3} sm={3} md={3} style={{backgroundColor: '#8F7EA8'}}>
+					<RoundStatistic text={'Level'} level={this.state.level} />
+					<RoundStatistic text={'Score'} level={this.state.score} />
+					<Fab variant="extended" color="primary" aria-label="add" style={{ minWidth: '350px', minHeight: '120px', backgroundColor: '#3FB250' }}
+						onClick={this.handleStartBtnClick} disabled={this.state.isRoundOngoing}>
+						Start
+        			</Fab>
+				</Grid>
+			</Grid>
 		);
 	}
 }
