@@ -37,7 +37,7 @@ class App extends React.Component<{}, {
 		}
 
 		this.currentStep = 0;
-		this.sequenceLength = 5;
+		this.sequenceLength = 3;
 		this.isGameOver = false;
 	}
 
@@ -78,14 +78,15 @@ class App extends React.Component<{}, {
 
 	handleStartBtnClick() {
 		if (this.isGameOver) {
-			this.resetRound(0, 1, 5, 3);
+			this.setState({currentSymbol: ""})
+			this.resetRound(0, 1, 3, 3);
 			this.isGameOver = false;
 		} else {
 			this.resetRound(this.state.score, this.state.level, this.sequenceLength, this.state.health);
 		}
 
 		this.setState({ isRoundOngoing: true })
-		this.setTimeInterval(() => this.generateNextDigit(), 200);
+		this.setTimeInterval(() => this.generateNextDigit(), 1000);
 	}
 
 	handleDigitBtnClick(currentStepActualDigit: number) {
@@ -105,7 +106,7 @@ class App extends React.Component<{}, {
 
 		if (this.currentStep === this.sequenceLength) {
 			this.setState({ currentSymbol: 'V' });
-			this.resetRound(this.state.score, this.state.level + 1, this.sequenceLength + 1, this.state.health)
+			this.resetRound(this.state.score + 1, this.state.level + 1, this.sequenceLength + 1, this.state.health)
 		}
 	}
 
