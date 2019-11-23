@@ -4,12 +4,12 @@ import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles(theme => ({
     digitKey: {
-        margin: theme.spacing(1),
-        minWidth: '120px',
-        minHeight: '120px',
+        margin: '1%',
+        width: '18%',
+        height: '16vh',
         backgroundColor: '#8F7EAA',
         color: 'white',
-        fontSize: '40px'
+        fontSize: '7vh'
     }
 }));
 
@@ -45,10 +45,11 @@ class DigitKeyboard extends React.Component<{ onClick: any, disabled: boolean },
     render() {
 
         const digitKeyboardStyles = {
-            padding: '30px',
+            padding: '2%',
             display: 'block',
             margin: 'auto',
-            width: '60%'
+            width: '60%',
+            height: '30%'
         }
 
         return (

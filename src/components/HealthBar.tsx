@@ -6,14 +6,14 @@ import Favorite from '@material-ui/icons/Favorite';
 const HealthBar =(props: any) =>{
     const healthStyles = {
         color: '#E85C78', 
-        width: '40px', 
-        height: '40px',
-        marginRight: '10px'
+        width: '9%', 
+        height: '9%',
+        marginRight: '1%'
     }
     const healthColor: string = props.health > 0 ? "#3FB250" : "#E85C78"
     return (
         <Box width={1 / 3}>
-            <div style={{ whiteSpace: 'nowrap', padding: '10px 0px 0px 10px' }}>
+            <div style={{ whiteSpace: 'nowrap', padding: '2% 0 0 2%' }}>
                 <Favorite style={healthStyles} />
                 <Line percent={props.health * 100 / 3} strokeWidth={8} trailWidth={8} 
                 strokeColor={healthColor} trailColor="#51475F" />

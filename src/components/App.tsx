@@ -1,12 +1,12 @@
 import React from "react";
-import DigitWindow from "./components/DigitWindow";
-import DigitKeyboard from "./components/DigitKeyboard";
-import CircleStatistic from "./components/CircleStatistic";
+import DigitWindow from "./DigitWindow";
+import DigitKeyboard from "./DigitKeyboard";
+import CircleStatistic from "./CircleStatistic";
 import Grid from '@material-ui/core/Grid';
-import HealthBar from './components/HealthBar';
+import HealthBar from './HealthBar';
 import 'typeface-roboto';
-import StartButton from "./components/StartButton";
-import './index.css'
+import StartButton from "./StartButton";
+import '../index.css'
 
 
 

@@ -5,8 +5,8 @@ import { Box } from "@material-ui/core";
 
 function CircleStatistic(props: any) {
     const roundBox = {
-        height: 250,
-        width: 250,
+        height: '80%',
+        width: '55%',
         rounded: true,
         borderRadius: '50%',
         backgroundColor: '#665A72',
@@ -15,8 +15,8 @@ function CircleStatistic(props: any) {
     }
 
     const titleStyles = {
-        paddingTop: '20px',
-        fontSize: '50px'
+        paddingTop: '10%',
+        fontSize: '3vw'
     }
 
     return (
@@ -25,7 +25,7 @@ function CircleStatistic(props: any) {
                 <Typography align='center' style={titleStyles}>
                     {props.text}
                 </Typography>
-                <Typography align='center' style={{ fontSize: '90px' }}>
+                <Typography align='center' style={{ fontSize: '4vw' }}>
                     {props.level}
                 </Typography>
             </Paper>

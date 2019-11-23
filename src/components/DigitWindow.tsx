@@ -7,34 +7,36 @@ import Done from '@material-ui/icons/Done';
 const DigitWindow = (props: any) => {
 
     const containerStyles = {
-        height: 360,
-        width: 320,
+        height: '50%',
+        width: '40%',
         margin: 'auto'
     }
 
     const roundBoxStyles = {
-        height: 320,
-        width: 320,
+        height: '80%',
+        width: '68%',
         rounded: true,
         borderRadius: '10%',
         backgroundColor: '#51475F',
-        color: '#3FB250'
+        color: '#3FB250',
+        margin: 'auto'
     }
     const gameOverStyles = {
-        fontSize: '90px',
+        fontSize: '12vh',
         color: '#E85C78',
         lineHeight: '90%',
-        padding: '20% 0'
+        padding: '22% 0'
     }
     const doneStyles = {
         color: '#3FB250',
         width: '70%',
         height: '70%',
-        margin: '15%'
+        margin: 'auto',
+        padding: '10% 15%'
     }
 
     const digitNumberHeaderStyles = {
-        fontSize: '40px',
+        fontSize: '7vh',
         color: 'white'
     }
 
@@ -46,7 +48,7 @@ const DigitWindow = (props: any) => {
     } else {
         const symbolColor = props.newDigit !== 'X' ? '#3FB250' : '#E85C78'
         const doneIcon = (<Done style={doneStyles} />)
-        const digitSymbol = (<Typography align='center' style={{ fontSize: '200px', color: symbolColor }}>
+        const digitSymbol = (<Typography align='center' style={{ fontSize: '25vh', color: symbolColor }}>
             {props.newDigit}
         </Typography>);
         content = props.newDigit === 'V' ? doneIcon : digitSymbol
