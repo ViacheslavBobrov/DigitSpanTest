@@ -1,13 +1,11 @@
 import React from "react";
-import DigitGenerator from "./components/DigitGenerator";
+import DigitWindow from "./components/DigitWindow";
 import DigitKeyboard from "./components/DigitKeyboard";
-import RoundStatistic from "./components/RoundStatistic";
-import Box from '@material-ui/core/Box';
+import CircleStatistic from "./components/CircleStatistic";
 import Grid from '@material-ui/core/Grid';
 import HealthBar from './components/HealthBar';
 import 'typeface-roboto';
 import StartButton from "./components/StartButton";
-import { CSSTransition } from 'react-transition-group';
 import './index.css'
 
 
@@ -63,26 +61,24 @@ class App extends React.Component<{}, {
 			digitsSequence: this.state.digitsSequence.concat(nextNumber),
 			currentSymbol: nextNumber
 		})
-
 	}
 
-	resetRound(score: number, level: number, newSequenceLength: number, health: number) {
+	resetRound(score: number, level: number, newSequenceLength: number, health: number, currentSymbol: any) {
 		this.currentStep = 0;
 		this.sequenceLength = newSequenceLength;
 		this.setState({
-			digitsSequence: [], score: score, level: level, health: health,
+			digitsSequence: [], score: score, level: level, health: health, currentSymbol: currentSymbol,
 			isSequenceNotGenerated: true, isRoundOngoing: false
 		});
-
 	}
 
 	handleStartBtnClick() {
+		const state = this.state
 		if (this.isGameOver) {
-			this.setState({currentSymbol: ""})
-			this.resetRound(0, 1, 3, 3);
+			this.resetRound(0, 1, 3, 3, "");
 			this.isGameOver = false;
 		} else {
-			this.resetRound(this.state.score, this.state.level, this.sequenceLength, this.state.health);
+			this.resetRound(state.score, state.level, this.sequenceLength, state.health, state.currentSymbol);
 		}
 
 		this.setState({ isRoundOngoing: true })
@@ -90,13 +86,14 @@ class App extends React.Component<{}, {
 	}
 
 	handleDigitBtnClick(currentStepActualDigit: number) {
+		const state = this.state
 		const currentStepExpectedDigit = this.state.digitsSequence[this.currentStep]
 		if (currentStepExpectedDigit === currentStepActualDigit) {
-			this.setState({ score: this.state.score + 1, currentSymbol: currentStepExpectedDigit });
+			this.setState({ score: state.score + 1, currentSymbol: currentStepExpectedDigit });
 			this.currentStep++
 		} else {
-			if (this.state.health > 1) {
-				this.setState({ health: this.state.health - 1, currentSymbol: 'X' });
+			if (state.health > 1) {
+				this.setState({ health: state.health - 1, currentSymbol: 'X' });
 			} else {
 				this.setState({ health: 0, isRoundOngoing: false, isSequenceNotGenerated: true });
 				this.isGameOver = true;
@@ -105,27 +102,25 @@ class App extends React.Component<{}, {
 		}
 
 		if (this.currentStep === this.sequenceLength) {
-			this.setState({ currentSymbol: 'V' });
-			this.resetRound(this.state.score + 1, this.state.level + 1, this.sequenceLength + 1, this.state.health)
+			this.resetRound(state.score + 1, state.level + 1, this.sequenceLength + 1, state.health, 'V')
 		}
 	}
 
 
 	render() {
-		const digitsSequence: number[] = this.state.digitsSequence;
-		console.log(digitsSequence)
+		const state = this.state
 		return (
-			<Grid container component="main" style={{ height: '100vh', margin: 0, border: 0 }}>
+			<Grid container component="main" style={{ height: '100vh'}}>
 				<Grid item xs={9} sm={9} md={9} style={{ backgroundColor: '#2E2937' }}>
-					<HealthBar health={this.state.health} />
-					<DigitGenerator newDigit={this.state.currentSymbol} sequenceLength={this.sequenceLength} isGameOver={this.isGameOver} />
+					<HealthBar health={state.health} />
+					<DigitWindow newDigit={state.currentSymbol} sequenceLength={this.sequenceLength} isGameOver={this.isGameOver} />
 					<DigitKeyboard onClick={(digit: number) => this.handleDigitBtnClick(digit)}
-						disabled={this.state.isSequenceNotGenerated} />
+						disabled={state.isSequenceNotGenerated} />
 				</Grid>
 				<Grid item xs={3} sm={3} md={3} style={{ backgroundColor: '#8F7EA8' }}>
-					<RoundStatistic text={'Level'} level={this.state.level} />
-					<RoundStatistic text={'Score'} level={this.state.score} />
-					<StartButton onClick={this.handleStartBtnClick} disabled={this.state.isRoundOngoing} isGameOver={this.isGameOver}/>
+					<CircleStatistic text={'Level'} level={this.state.level} />
+					<CircleStatistic text={'Score'} level={this.state.score} />
+					<StartButton onClick={this.handleStartBtnClick} disabled={state.isRoundOngoing} isGameOver={this.isGameOver} />
 				</Grid>
 			</Grid>
 		);

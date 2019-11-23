@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { Box } from "@material-ui/core";
 
-function RoundStatistic(props: any) {
+function CircleStatistic(props: any) {
     const roundBox = {
         height: 250,
         width: 250,
@@ -11,12 +11,18 @@ function RoundStatistic(props: any) {
         borderRadius: '50%',
         backgroundColor: '#665A72',
         color: 'white',
-        margin: 'auto'
+        margin: '5% auto'
     }
+
+    const titleStyles = {
+        paddingTop: '20px',
+        fontSize: '50px'
+    }
+
     return (
-        <Box style={{padding: '10px'}} height={1/3}>
+        <Box height={1 / 3}>
             <Paper style={roundBox} >
-                <Typography align='center' style={{ paddingTop: '20px', fontSize: '50px' }}>
+                <Typography align='center' style={titleStyles}>
                     {props.text}
                 </Typography>
                 <Typography align='center' style={{ fontSize: '90px' }}>
@@ -27,4 +33,4 @@ function RoundStatistic(props: any) {
     );
 }
 
-export default RoundStatistic;
+export default CircleStatistic;
