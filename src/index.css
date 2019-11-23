@@ -1,14 +1,33 @@
-.fadeOut{
-    opacity:0;
-    width:0;
-    height:0;
-    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.digit-generator {
+    opacity: 0; 
+    animation-name: opacityOn;
+    animation-duration: 0.2s;
+    -webkit-animation-name: opacityOn; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 0.2s; /* Safari 4.0 - 8.0 */
+}
+
+@-webkit-keyframes opacityOn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: '100%';
+    }
 
 }
-.fadeIn{
-    opacity:1;
-    width:100px;
-    height:100px;
-    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+  
+
+@keyframes opacityOn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: '100%';
+    }
 
 }
