@@ -5,7 +5,7 @@ import Done from '@material-ui/icons/Done';
 import '../index.css'
 
 
-class DigitGenerator extends React.Component<{ sequenceLength: number, newDigit: any }, { content: any }> {
+class DigitGenerator extends React.Component<{ sequenceLength: number, newDigit: any, isGameOver: boolean }, { content: any }> {
 
     constructor(props: any) {
         super(props);
@@ -22,13 +22,19 @@ class DigitGenerator extends React.Component<{ sequenceLength: number, newDigit:
             backgroundColor: '#51475F',
             color: '#3FB250'
         }
-        const symbolColor = this.props.newDigit !== 'X' ? '#3FB250' : '#E85C78'
-        const doneIcon = (<Done style={{ color: '#3FB250', width: '70%', height: '70%', margin: '15%' }} />)
-        const digitSymbol = (<Typography align='center' style={{ fontSize: '200px', color: symbolColor }}>
-            {this.props.newDigit}
+        let content;
+        if (this.props.isGameOver) {
+            content = (<Typography align='center' style={{ fontSize: '90px', color: '#E85C78', lineHeight: '90%', padding: '20% 0' }}>
+                Game over
         </Typography>);
-        const nextSymbol = this.props.newDigit === 'V' ? doneIcon : digitSymbol
-
+        } else {
+            const symbolColor = this.props.newDigit !== 'X' ? '#3FB250' : '#E85C78'
+            const doneIcon = (<Done style={{ color: '#3FB250', width: '70%', height: '70%', margin: '15%' }} />)
+            const digitSymbol = (<Typography align='center' style={{ fontSize: '200px', color: symbolColor }}>
+                {this.props.newDigit}
+            </Typography>);
+            content = this.props.newDigit === 'V' ? doneIcon : digitSymbol
+        }
         return (
 
             <div style={{ height: 360, width: 320, margin: 'auto' }}>
@@ -36,7 +42,7 @@ class DigitGenerator extends React.Component<{ sequenceLength: number, newDigit:
                     {this.props.sequenceLength} Digits
                 </Typography>
                 <Paper style={roundBox} >
-                    {nextSymbol}
+                    {content}
                 </Paper>
             </div>
         );

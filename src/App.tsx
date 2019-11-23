@@ -83,7 +83,7 @@ class App extends React.Component<{}, {
 		} else {
 			this.resetRound(this.state.score, this.state.level, this.sequenceLength, this.state.health);
 		}
-		
+
 		this.setState({ isRoundOngoing: true })
 		this.setTimeInterval(() => this.generateNextDigit(), 200);
 	}
@@ -112,28 +112,19 @@ class App extends React.Component<{}, {
 
 	render() {
 		const digitsSequence: number[] = this.state.digitsSequence;
-		//const newDigit: any = this.state.isSequenceNotGenerated ? digitsSequence[digitsSequence.length - 1] : "";
 		console.log(digitsSequence)
 		return (
 			<Grid container component="main" style={{ height: '100vh', margin: 0, border: 0 }}>
 				<Grid item xs={9} sm={9} md={9} style={{ backgroundColor: '#2E2937' }}>
 					<HealthBar health={this.state.health} />
-					<CSSTransition
-						in={true}
-						timeout={350}
-						classNames="display"
-						unmountOnExit
-						appear
-					>
-						<DigitGenerator newDigit={this.state.currentSymbol} sequenceLength={this.sequenceLength} />
-					</CSSTransition>
+					<DigitGenerator newDigit={this.state.currentSymbol} sequenceLength={this.sequenceLength} isGameOver={this.isGameOver} />
 					<DigitKeyboard onClick={(digit: number) => this.handleDigitBtnClick(digit)}
 						disabled={this.state.isSequenceNotGenerated} />
 				</Grid>
 				<Grid item xs={3} sm={3} md={3} style={{ backgroundColor: '#8F7EA8' }}>
 					<RoundStatistic text={'Level'} level={this.state.level} />
 					<RoundStatistic text={'Score'} level={this.state.score} />
-					<StartButton onClick={this.handleStartBtnClick} disabled={this.state.isRoundOngoing} />
+					<StartButton onClick={this.handleStartBtnClick} disabled={this.state.isRoundOngoing} isGameOver={this.isGameOver}/>
 				</Grid>
 			</Grid>
 		);
